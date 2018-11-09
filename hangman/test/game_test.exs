@@ -17,4 +17,12 @@ defmodule GameTest do
 
     assert result == true
   end
+
+  test "should return the same game if its state is :won or :lost" do
+    for state <- [:won, :lost] do
+      game = Game.new_game() |> Map.put(:game_state, state)
+
+      assert {^game, _} = Game.make_move(game, "foo")
+    end
+  end
 end
